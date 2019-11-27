@@ -105,6 +105,8 @@ def main():
     parser.add_argument('--sciezka-do-pliku', type=str, required=False,
                         help='Sciezka do pliku, w ktorym znajduja sie informacje o planszy; '
                              'wpisac w przypadku generowania planszy z pliku')
+    parser.add_argument('--sciezka-do-zapisu', type=str, required=True,
+                        help='Ściezka do zapisu kolejnych kroków prowadzacych do rozwiazania')
     parser.set_defaults(func=play_game)
     args = parser.parse_args()
     args.func(args)
