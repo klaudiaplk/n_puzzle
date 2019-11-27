@@ -50,3 +50,12 @@ class Board:
     def getBoard(self):
         return self.board
 
+    def __str__(self):
+        string = ""
+        for i in range(0, len(self.board)):
+            for j in range(0, len(self.board)):
+                string += "{:2d}".format(self.board[i][j]) + " "
+            string += "\n"
+        string += '--------------'
+        string += "\n"
+        return string

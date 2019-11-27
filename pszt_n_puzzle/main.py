@@ -74,8 +74,12 @@ def play_game(args):
             # path = state_search.search_A_star()
         else:
             path = state_search.search_A_star()
-        for i in reversed(path):
-            i.getBoard().printBoard()
+        with open(args.sciezka_do_zapisu, "a") as f:
+            for i in reversed(path):
+                #i.getBoard().printBoard()
+                print(i.getBoard())
+                print(i.getBoard(), file=f)
+            
         print('Checked states', state_search.getCheckedCount())
         print("Used process time: {:.4f}s".format(state_search.getUsedTime()))
     else:
