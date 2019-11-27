@@ -4,10 +4,19 @@ import copy
 class Board:
 
     def __init__(self, n, board):
+        """Init.
+
+        :param n:  board height
+        :param board: input board
+        """
         self.n = n
         self.board = board
 
     def getBlankPosition(self):
+        """Get blank space position.
+
+        :return: location of the empty field
+        """
         x = 0
         y = 0
         for i in range(0, len(self.board)):
@@ -18,6 +27,10 @@ class Board:
         return [x, y]
 
     def getNeighbors(self):
+        """Get neighbors positions.
+
+        :return: neighbors positions
+        """
         neighbors_boards = []
         x, y = self.getBlankPosition()
         shifts = [[x, y + 1], [x, y - 1], [x + 1, y], [x - 1, y]]
@@ -31,6 +44,10 @@ class Board:
         return neighbors_boards
 
     def moveBlank(self, shift):
+        """Move blank space.
+
+        :param shift: place where the empty space is to move
+        """
         blank_x, blank_y = self.getBlankPosition()
         x, y = shift
         tmp = self.board[y][x]
@@ -39,6 +56,9 @@ class Board:
 
 
     def printBoard(self):
+        """Print board.
+
+        """
         print('print')
         for i in range(0, len(self.board)):
             for j in range(0, len(self.board)):
