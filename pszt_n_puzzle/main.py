@@ -43,10 +43,16 @@ def play_game(args):
             with open(path) as file:
                 for line in file:
                     board.extend(line.strip().split())
-            n = board.pop(0)
+            board = [int(i) for i in board] 
+            height = board.pop(0)
             for liczba in board:
                 print(type(liczba))
-            input_board = np.reshape(board, (n, n))
+            input_board = []
+            for i in range(0, height):
+                tmp = []
+                for j in range(0, height):
+                    tmp.append(board[i*height + j])
+                input_board.append(tmp)
         else:
             raise NameError('Sciezka do pliku nie zostala podana lub zostala podana blednie')
 
