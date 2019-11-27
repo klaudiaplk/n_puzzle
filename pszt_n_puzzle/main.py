@@ -44,14 +44,12 @@ def play_game(args):
                 for line in file:
                     board.extend(line.strip().split())
             board = [int(i) for i in board] 
-            height = board.pop(0)
-            for liczba in board:
-                print(type(liczba))
+            n = board.pop(0)
             input_board = []
-            for i in range(0, height):
+            for i in range(0, n):
                 tmp = []
-                for j in range(0, height):
-                    tmp.append(board[i*height + j])
+                for j in range(0, n):
+                    tmp.append(board[i*n + j])
                 input_board.append(tmp)
         else:
             raise NameError('Sciezka do pliku nie zostala podana lub zostala podana blednie')
@@ -78,6 +76,8 @@ def play_game(args):
             path = state_search.search_A_star()
         for i in reversed(path):
             i.getBoard().printBoard()
+        print('Checked states', state_search.getCheckedCount())
+        print("Used process time: {:.4f}s".format(state_search.getUsedTime()))
     else:
         raise NameError('Nie da sie rozegrac gry n_puzzle dla podanej planszy')
 

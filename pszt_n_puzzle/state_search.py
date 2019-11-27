@@ -19,7 +19,6 @@ class State_search:
         open_states.append(self.init_state)
         while open_states:
             cur_state = open_states.popleft()
-            cur_state.getBoard().printBoard()
             if cur_state.isSolution():
                    path = self.returnPath(cur_state)
                    self.used_time = time.process_time() - used_time
@@ -27,7 +26,7 @@ class State_search:
             if visited.get(cur_state, False) == False:
                 self.checked_count = self.checked_count + 1
                 # print checked states
-                print("\r Checked states {}".format(self.checked_count), end="")
+                print("\rChecked states {}".format(self.checked_count), end="")
                 open_states.extend(cur_state.getNeighbors())
                 visited[cur_state] = True
         print()
@@ -53,7 +52,6 @@ class State_search:
         heapq.heappush(open_states, self.init_state)
         while open_states:
             cur_state = heapq.heappop(open_states)
-            cur_state.getBoard().printBoard()
             if cur_state.isSolution():
                 path = self.returnPath(cur_state)
                 self.used_time = time.process_time() -used_time
@@ -62,7 +60,7 @@ class State_search:
             if cur_state not in list_key:
                 self.checked_count = self.checked_count + 1
                 # print checked states
-                print("\r Checked states {}".format(self.checked_count), end="")
+                print("\rChecked states {}".format(self.checked_count), end="")
                 for neighbor in cur_state.getNeighbors():
                     heapq.heappush(open_states, neighbor)
                 visited[cur_state] = cur_state
