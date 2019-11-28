@@ -2,7 +2,7 @@ import logging
 import os
 
 from pszt_n_puzzle.board import Board
-from pszt_n_puzzle.misc import generate_board, generate_goal_board
+from pszt_n_puzzle.misc import generate_board, generate_goal_board, animate
 from pszt_n_puzzle.state import State
 from pszt_n_puzzle.state_search import State_search
 
@@ -56,7 +56,7 @@ def play_game(args):
             path = state_search.search_BFS()
         else:
             path = state_search.search_A_star()
-        with open(args.save_path, "a") as f:
+        with open(args.save_path, "w") as f:
             counter = 0
             for i in reversed(path):
                 counter = counter + 1
@@ -68,5 +68,6 @@ def play_game(args):
             print('Number of empty field moves: ', counter, file=f)
             print("Used process time: {:.4f}s".format(state_search.getUsedTime()))
             print("Used process time: {:.4f}s".format(state_search.getUsedTime()), file=f)
+        animate(path, n)
     else:
         raise NameError('There is no solution for this board! Sorry :)')
