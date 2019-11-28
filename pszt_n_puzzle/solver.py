@@ -44,6 +44,8 @@ def play_game(args):
         state = State(board, goal, "BFS", 0)
         state.setHeuristicValue()
     elif args.algorithm_name == 'a_star':
+        if args.heuristic not in {'manhattan', 'misplaces_tiles'}:
+            raise NameError('Heuristic name entered is incorrect!')
         board = Board(n, input_board)
         state = State(board, goal, args.heuristic, 0)
         state.setHeuristicValue()
