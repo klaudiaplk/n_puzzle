@@ -36,6 +36,8 @@ class State_search:
                 print("\rChecked states {}".format(self.checked_count), end="")
                 open_states.extend(cur_state.getNeighbors())
                 visited[cur_state] = True
+        # to print solution path from new line 
+        print()
         return path
 
     def returnPath(self, cur_state):
@@ -66,22 +68,23 @@ class State_search:
         heapq.heappush(open_states, self.init_state)
         while open_states:
             cur_state = heapq.heappop(open_states)
+            self.checked_count = self.checked_count + 1
+            print("\rChecked states {}".format(self.checked_count), end="")
             if cur_state.isSolution():
                 path = self.returnPath(cur_state)
                 self.used_time = time.process_time() -used_time
                 break
-            list_key = visited
-            if cur_state not in list_key:
-                self.checked_count = self.checked_count + 1
-                print("\rChecked states {}".format(self.checked_count), end="")
-                for neighbor in cur_state.getNeighbors():
-                    heapq.heappush(open_states, neighbor)
-                visited[cur_state] = cur_state
-            else:
-                if cur_state.getHeuristic() < visited[cur_state].getHeuristic():
-                    in_open = visited[cur_state]
-                    in_open.setHeuristic(cur_state.getHeuristic())
-                    in_open.setParent(cur_state.getParent())
+            for neighbor in cur_state.getNeighbors():
+                if neighbor not in visited:
+                    heapq.heappush(open_states,  neighbor)
+                    visited[neighbor] = neighbor
+                else:
+                    if neighbor.getHeuristic() < visited[neighbor].getHeuristic():
+                        in_open = visited[neighbor]
+                        in_open.setHeuristic(neighbor.getHeuristic())
+                        in_open.setParent(neighbor.getParent())
+        # to start printing solution path from new line
+        print()
         return path
 
     def getCheckedCount(self):
