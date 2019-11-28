@@ -20,9 +20,9 @@ class State:
         """Set heuristic value.
 
         """
-        if self.heuristic_type == "Manhattan":
+        if self.heuristic_type == "manhattan":
             self.val_heuristic = self.getManhattan() + self.depth
-        elif self.heuristic_type == "Misplaces tiles":
+        elif self.heuristic_type == "misplaced_tiles":
             self.val_heuristic = self.getMisplacesTiles() + self.depth
         elif self.heuristic_type == "BFS":
             self.val_heuristic = self.depth
