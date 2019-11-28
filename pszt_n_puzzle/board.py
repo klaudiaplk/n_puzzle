@@ -4,10 +4,19 @@ import copy
 class Board:
 
     def __init__(self, n, board):
+        """Init.
+
+        :param n:  board height
+        :param board: input board
+        """
         self.n = n
         self.board = board
 
     def getBlankPosition(self):
+        """Get blank space position.
+
+        :return: location of the empty field
+        """
         x = 0
         y = 0
         for i in range(0, len(self.board)):
@@ -18,6 +27,10 @@ class Board:
         return [x, y]
 
     def getNeighbors(self):
+        """Get neighbors positions.
+
+        :return: neighbors positions
+        """
         neighbors_boards = []
         x, y = self.getBlankPosition()
         shifts = [[x, y + 1], [x, y - 1], [x + 1, y], [x - 1, y]]
@@ -31,23 +44,25 @@ class Board:
         return neighbors_boards
 
     def moveBlank(self, shift):
+        """Move blank space.
+
+        :param shift: place where the empty space is to move
+        """
         blank_x, blank_y = self.getBlankPosition()
-       # print(shift)
         x, y = shift
-        #print("przed")
-       # self.printBoard()
         tmp = self.board[y][x]
-        #print(tmp)
         self.board[y][x] = -1
         self.board[blank_y][blank_x] = tmp
-       # print('po')
-        #self.printBoard()
+
 
     def printBoard(self):
+        """Print board.
+
+        """
         print('print')
         for i in range(0, len(self.board)):
             for j in range(0, len(self.board)):
-                print(self.board[i][j], end = ' ')
+                print("{:2d}".format(self.board[i][j]), end = ' ')
             print()
         print('--------------')
 
@@ -55,3 +70,12 @@ class Board:
     def getBoard(self):
         return self.board
 
+    def __str__(self):
+        string = ""
+        for i in range(0, len(self.board)):
+            for j in range(0, len(self.board)):
+                string += "{:2d}".format(self.board[i][j]) + " "
+            string += "\n"
+        string += '--------------'
+        string += "\n"
+        return string
